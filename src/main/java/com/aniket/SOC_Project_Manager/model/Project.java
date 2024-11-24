@@ -2,6 +2,7 @@ package com.aniket.SOC_Project_Manager.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -29,18 +30,19 @@ public class Project {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enrollment_no")
+    @JsonProperty("enrollment_no")
     private Student student;
 
     @NotBlank
     private String description;
 
-    @Positive
+    @NotBlank
     private String repoLink;
 
     @NotBlank
     private String majorOrMinor;
 
-    @NotBlank
+    @Enumerated(EnumType.STRING)
     private ApprovalStatus status;
 
     public Project(int productId){}

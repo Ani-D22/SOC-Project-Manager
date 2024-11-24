@@ -2,7 +2,7 @@ package com.aniket.SOC_Project_Manager.model;
 
 
 public enum ApprovalStatus {
-    AWAITED,
+    PENDING,
     REJECTED,
     APPROVED
 }

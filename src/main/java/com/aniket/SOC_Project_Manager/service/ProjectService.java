@@ -1,6 +1,7 @@
 package com.aniket.SOC_Project_Manager.service;
 
 
+import com.aniket.SOC_Project_Manager.model.ApprovalStatus;
 import com.aniket.SOC_Project_Manager.model.Project;
 import com.aniket.SOC_Project_Manager.model.Student;
 import com.aniket.SOC_Project_Manager.repo.ProjectRepo;
@@ -31,11 +32,15 @@ public class ProjectService {
                 .orElseThrow(() -> new RuntimeException("Project not found"));
     }
 
-    public Project addProject(Project project) {
+    public Project addProject(Project project, Student student) {
+        project.setStatus(ApprovalStatus.PENDING);
+        project.setStudent(student);
         return projectRepo.save(project);
     }
-    public Project updateProject(Project project, Long projectId) {
+    public Project updateProject(Project project, Long projectId, Student student) {
         projectRepo.deleteById(projectId);
+        project.setStatus(ApprovalStatus.PENDING);
+        project.setStudent(student);
         return projectRepo.save(project);
     }
 

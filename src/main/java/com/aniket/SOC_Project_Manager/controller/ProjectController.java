@@ -44,16 +44,21 @@ class ProjectController {
     }
 
     @PostMapping("/addProject")
-    public ResponseEntity<?> createProject(@RequestBody Project project) throws IOException {
+    public ResponseEntity<?> createProject(@RequestBody Project project, @AuthenticationPrincipal UserDetails studentDetails) throws IOException {
         Project savedProject = null;
-        savedProject = projectService.addProject(project);
+        Student student = studentRepo.findByEmail(studentDetails.getUsername());
+
+        savedProject = projectService.addProject(project, student);
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
 
     @PutMapping("/updateProject/{projectId}")
-    public ResponseEntity<?> updateProject(@RequestBody Project project, @PathVariable Long projectId) throws IOException {
+    public ResponseEntity<?> updateProject(@RequestBody Project project, @PathVariable Long projectId,
+                                           @AuthenticationPrincipal UserDetails studentDetails) throws IOException {
         Project savedProject = null;
-        savedProject = projectService.updateProject(project, projectId);
+        Student student = studentRepo.findByEmail(studentDetails.getUsername());
+
+        savedProject = projectService.updateProject(project, projectId, student);
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
 
