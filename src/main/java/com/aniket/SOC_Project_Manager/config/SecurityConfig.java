@@ -49,7 +49,7 @@ public class SecurityConfig {
         http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/faculty/signup", "/api/faculty/signin","/api/student/signup", "/api/student/signin")
+                        .requestMatchers("/api/mentor/signup", "/api/mentor/signin","/api/student/signup", "/api/student/signin")
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

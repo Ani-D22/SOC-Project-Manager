@@ -8,13 +8,13 @@ import java.util.Collection;
 import java.util.Collections;
 
 
-public class FacultyPrincipal implements UserDetails {
+public class MentorPrincipal implements UserDetails {
 
-    private Faculty faculty;
+    private Mentor mentor;
 
 
-    public FacultyPrincipal(Faculty faculty){
-        this.faculty = faculty;
+    public MentorPrincipal(Mentor mentor){
+        this.mentor = mentor;
     }
 
     @Override
@@ -24,12 +24,12 @@ public class FacultyPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return faculty.getPassword();
+        return mentor.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return faculty.getEmail();
+        return mentor.getEmail();
     }
 
     @Override

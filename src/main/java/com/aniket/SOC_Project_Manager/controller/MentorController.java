@@ -1,9 +1,9 @@
 package com.aniket.SOC_Project_Manager.controller;
 
 
-import com.aniket.SOC_Project_Manager.model.Faculty;
+import com.aniket.SOC_Project_Manager.model.Mentor;
 import com.aniket.SOC_Project_Manager.service.JwtService;
-import com.aniket.SOC_Project_Manager.service.FacultyService;
+import com.aniket.SOC_Project_Manager.service.MentorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/mentor")
 @RequiredArgsConstructor
-public class FacultyController {
+public class MentorController {
     @Autowired
-    private final FacultyService facultyService;
+    private final MentorService mentorService;
 
     @Autowired
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -33,21 +33,21 @@ public class FacultyController {
     AuthenticationManager authenticationManager;
 
 
-    @PostMapping("/faculty/signup")
-    public ResponseEntity<Faculty> signup(@RequestBody Faculty faculty) {
+    @PostMapping("/signup")
+    public ResponseEntity<Mentor> signup(@RequestBody Mentor mentor) {
 
-        faculty.setPassword(encoder.encode(faculty.getPassword()));
-        System.out.println("Encrypted using BCrypt Password : " + faculty.getPassword());
+        mentor.setPassword(encoder.encode(mentor.getPassword()));
+        System.out.println("Encrypted using BCrypt Password : " + mentor.getPassword());
 
-        return ResponseEntity.ok(facultyService.signup(faculty));
+        return ResponseEntity.ok(mentorService.signup(mentor));
     }
 
-    @PostMapping("/faculty/signin")
-    public String signin(@RequestBody Faculty faculty){
+    @PostMapping("/signin")
+    public String signin(@RequestBody Mentor mentor){
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(faculty.getEmail(),faculty.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(mentor.getEmail(),mentor.getPassword()));
 
-        if(authentication.isAuthenticated())    return jwtService.generateToken(faculty.getEmail());//"Login Successful..!";
+        if(authentication.isAuthenticated())    return jwtService.generateToken(mentor.getEmail());//"Login Successful..!";
         else    return "Login Failed...";
     }
 }

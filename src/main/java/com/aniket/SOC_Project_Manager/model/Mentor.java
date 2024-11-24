@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Faculty")
+@Table(name = "Mentor")
 @Entity
-public class Faculty {
+public class Mentor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
@@ -31,6 +31,6 @@ public class Faculty {
     @NotBlank
     private String password;
 
-
-    private String address;
+    @NotBlank
+    private String phone;
 }

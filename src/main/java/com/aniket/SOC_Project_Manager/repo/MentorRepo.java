@@ -1,11 +1,11 @@
 package com.aniket.SOC_Project_Manager.repo;
-import com.aniket.SOC_Project_Manager.model.Faculty;
+import com.aniket.SOC_Project_Manager.model.Mentor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface FacultyRepo extends JpaRepository<Faculty, Long> {
-    Faculty findByEmail(String email);
+public interface MentorRepo extends JpaRepository<Mentor, Long> {
+    Mentor findByEmail(String email);
     boolean existsByEmail(String email);
 }

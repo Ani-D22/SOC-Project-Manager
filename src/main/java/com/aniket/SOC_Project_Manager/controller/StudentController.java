@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/student")
 @RequiredArgsConstructor
 public class StudentController {
     @Autowired
@@ -33,7 +33,7 @@ public class StudentController {
     AuthenticationManager authenticationManager;
 
 
-    @PostMapping("/student/signup")
+    @PostMapping("/signup")
     public ResponseEntity<Student> signup(@RequestBody Student student) {
 
         student.setPassword(encoder.encode(student.getPassword()));
@@ -42,7 +42,7 @@ public class StudentController {
         return ResponseEntity.ok(studentService.signup(student));
     }
 
-    @PostMapping("/student/signin")
+    @PostMapping("/signin")
     public String signin(@RequestBody Student student){
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(student.getEmail(),student.getPassword()));

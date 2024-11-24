@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,10 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "Student")
 @Entity
+@Builder
 public class Student {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    @Column(nullable = false, unique = true)
+    private String enrollment_no;
 
     @NotBlank
     private String name;
@@ -30,6 +33,6 @@ public class Student {
     @NotBlank
     private String password;
 
-
-    private String address;
+    @NotBlank
+    private String phone;
 }

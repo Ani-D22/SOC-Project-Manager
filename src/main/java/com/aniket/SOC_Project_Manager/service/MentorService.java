@@ -1,8 +1,8 @@
 package com.aniket.SOC_Project_Manager.service;
 
 
-import com.aniket.SOC_Project_Manager.model.Faculty;
-import com.aniket.SOC_Project_Manager.repo.FacultyRepo;
+import com.aniket.SOC_Project_Manager.model.Mentor;
+import com.aniket.SOC_Project_Manager.repo.MentorRepo;
 import com.aniket.SOC_Project_Manager.repo.StudentRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FacultyService {
+public class MentorService {
     @Autowired
-    private final FacultyRepo facultyRepo;
+    private final MentorRepo mentorRepo;
     @Autowired
     private final StudentRepo studentRepo;
     @Autowired
@@ -23,14 +23,14 @@ public class FacultyService {
     @Autowired
     private final JwtService jwtService;
 
-    public Faculty signup(Faculty faculty) {
-        if (facultyRepo.existsByEmail(faculty.getEmail())) {
-            throw new RuntimeException("Email already registered as a faculty");
+    public Mentor signup(Mentor mentor) {
+        if (mentorRepo.existsByEmail(mentor.getEmail())) {
+            throw new RuntimeException("Email already registered as a mentor");
         }
 
-        if (studentRepo.existsByEmail(faculty.getEmail())) {
+        if (studentRepo.existsByEmail(mentor.getEmail())) {
             throw new RuntimeException("Email already registered as a student");
         }
-        return facultyRepo.save(faculty);
+        return mentorRepo.save(mentor);
     }
 }

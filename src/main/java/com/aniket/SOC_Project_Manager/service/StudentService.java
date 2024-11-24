@@ -2,7 +2,7 @@ package com.aniket.SOC_Project_Manager.service;
 
 
 import com.aniket.SOC_Project_Manager.model.Student;
-import com.aniket.SOC_Project_Manager.repo.FacultyRepo;
+import com.aniket.SOC_Project_Manager.repo.MentorRepo;
 import com.aniket.SOC_Project_Manager.repo.StudentRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class StudentService {
     @Autowired
     private final StudentRepo studentRepo;
     @Autowired
-    private final FacultyRepo facultyRepo;
+    private final MentorRepo mentorRepo;
     @Autowired
     private final PasswordEncoder passwordEncoder;
     @Autowired
@@ -27,7 +27,7 @@ public class StudentService {
         if (studentRepo.existsByEmail(student.getEmail())) {
             throw new RuntimeException("Email already registered as a student");
         }
-        if (facultyRepo.existsByEmail(student.getEmail())) {
+        if (mentorRepo.existsByEmail(student.getEmail())) {
             throw new RuntimeException("Email already registered as a faculty");
         }
         return studentRepo.save(student);
