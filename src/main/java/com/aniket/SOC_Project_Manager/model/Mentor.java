@@ -31,6 +31,5 @@ public class Mentor {
     @NotBlank
     private String password;
 
-    @NotBlank
     private Long phone;
 }

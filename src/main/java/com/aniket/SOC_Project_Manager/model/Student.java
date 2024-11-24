@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 public class Student {
-
     @Id
     @Column(nullable = false, unique = true)
     private String enrollment_no;
@@ -33,6 +32,5 @@ public class Student {
     @NotBlank
     private String password;
 
-    @NotBlank
     private Long phone;
 }
