@@ -35,7 +35,7 @@ public class Project {
     private String description;
 
     @Positive
-    private BigDecimal repoLink;
+    private String repoLink;
 
     @NotBlank
     private String majorOrMinor;
