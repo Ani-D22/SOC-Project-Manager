@@ -63,10 +63,12 @@ class ProjectController {
     }
 
     @DeleteMapping("/deleteProject/{projectId}")
-    public ResponseEntity<?> deleteProject(@PathVariable Long projectId) {
+    public ResponseEntity<?> deleteProject(@PathVariable Long projectId,
+                                           @AuthenticationPrincipal UserDetails studentDetails) {
+        Student student = studentRepo.findByEmail(studentDetails.getUsername());
         Project project = projectService.getProject(projectId);
         if(project != null){
-            projectService.deleteProject(projectId);
+            projectService.deleteProject(projectId, student);
             System.out.println("Deleted");
             return new ResponseEntity<>("Deleted", HttpStatus.OK);
         }

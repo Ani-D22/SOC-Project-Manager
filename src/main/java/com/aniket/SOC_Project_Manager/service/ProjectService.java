@@ -44,7 +44,10 @@ public class ProjectService {
         return projectRepo.save(project);
     }
 
-    public void deleteProject(Long id) {
-        projectRepo.deleteById(id);
+    public void deleteProject(Long id, Student student) {
+        if(projectRepo.findByStudent(student)==student){
+            projectRepo.deleteById(id);
+        }
+        else System.out.println("Student enrollment_no does not match");
     }
 }
