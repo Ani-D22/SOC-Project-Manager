@@ -1,17 +1,13 @@
 package com.aniket.SOC_Project_Manager.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 
 @Entity
@@ -28,23 +24,42 @@ public class Project {
     @NotBlank
     private String projectName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enrollment_no")
-    @JsonProperty("enrollment_no")
-    private Student student;
-
-    @NotBlank
-    private String description;
-
+    //Code Repo
     @NotBlank
     private String repoLink;
 
+    //project status-----------------
     @NotBlank
     private String majorOrMinor;
 
     @Enumerated(EnumType.STRING)
     private ApprovalStatus status;
+    //---------------------------------
 
-    public Project(int productId){}
+    //Project Report------------------
+    @NotBlank
+    private String projectReportName;
+
+    @NotBlank
+    private String projectReportType;
+
+    @Lob
+    @NotBlank
+    private byte[] reportFile;
+    //---------------------------------
+
+    //Relations------------------------
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "enrollment_no")
+    @JsonProperty("enrollment_no")
+    private Student student;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonProperty("user_id")
+    private Mentor mentor;
+    //---------------------------------
+
+    public Project(int project_id){}
 
 }

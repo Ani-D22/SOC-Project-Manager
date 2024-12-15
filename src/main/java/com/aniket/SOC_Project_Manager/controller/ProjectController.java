@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+
+//STUDENT PERSPECTIVE
 @RestController
 @RequestMapping("/api/student/projects")
 @RequiredArgsConstructor
@@ -28,6 +30,7 @@ class ProjectController {
     @Autowired
     public final StudentRepo studentRepo;
 
+    //Show all projects from student
     @GetMapping
     public ResponseEntity<List<Project>> getAllProjects(@AuthenticationPrincipal UserDetails studentDetails) {
         Student student = studentRepo.findByEmail(studentDetails.getUsername());
@@ -35,6 +38,7 @@ class ProjectController {
         return ResponseEntity.ok(projectService.getProjectByStudent(student));
     }
 
+    //Show Project by id
     @GetMapping("/{projectId}")
     public ResponseEntity<Project> getproject(@PathVariable Long projectId) {
         Project project = projectService.getProject(projectId);
@@ -43,6 +47,7 @@ class ProjectController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    //Add new Project
     @PostMapping("/addProject")
     public ResponseEntity<?> createProject(@RequestBody Project project, @AuthenticationPrincipal UserDetails studentDetails) throws IOException {
         Project savedProject = null;
@@ -52,6 +57,7 @@ class ProjectController {
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
 
+    //Update Project
     @PutMapping("/updateProject/{projectId}")
     public ResponseEntity<?> updateProject(@RequestBody Project project, @PathVariable Long projectId,
                                            @AuthenticationPrincipal UserDetails studentDetails) throws IOException {
@@ -62,6 +68,7 @@ class ProjectController {
         return new ResponseEntity<>(savedProject, HttpStatus.CREATED);
     }
 
+    //Delete Project
     @DeleteMapping("/deleteProject/{projectId}")
     public ResponseEntity<?> deleteProject(@PathVariable Long projectId,
                                            @AuthenticationPrincipal UserDetails studentDetails) {
